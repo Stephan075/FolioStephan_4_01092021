@@ -33,10 +33,15 @@ img {
   padding-right: 1rem;
 }
 
+/* modification de topnav en flexbox */
 .topnav {
   overflow: hidden;
   margin: 3.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
 .header-logo {
   float: left;
 }
@@ -79,6 +84,10 @@ img {
     /* float: right; */
     /* color: red; */
     display: block;
+  }
+
+  .topnav {
+    flex-wrap: wrap;
   }
 }
 
@@ -499,12 +508,12 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 3rem;
     white-space: normal;
   }
   .hero-text {
-    width: unset;
-    font-size: 1.5rem;
+    width: auto;
+    font-size: 20px;
   }
   .hero-img img {
     border-radius: 10px;
@@ -534,9 +543,17 @@ footer {
   }
 }
 
+/* modifier taille du titre entre 800px - 1090px */
 @media screen and (min-width: 800px) and (max-width: 1090px) {
   .hero-headline {
     font-size: 46.8px;
+  }
+}
+
+/* modifier taille logo  */
+@media screen and (max-width: 800px) {
+  .header-logo img {
+    width: 150px;
   }
 }
 
