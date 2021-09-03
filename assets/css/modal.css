@@ -94,8 +94,6 @@ img {
     display: none;
   }
   .topnav a.icon {
-    /* float: right; */
-    /* color: red; */
     display: block;
   }
 
@@ -117,6 +115,7 @@ img {
     float: none;
     display: block;
     text-align: left;
+    right: 55px;
   }
 }
 
@@ -124,11 +123,6 @@ img {
   .topnav a {
     display: none;
   }
-  /* .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  } */
 }
 
 main {
@@ -473,7 +467,6 @@ input[data-error]::after {
 }
 .btn-signup {
   outline: none;
-  text-transform: capitalize;
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
@@ -525,7 +518,6 @@ footer {
   }
   .hero-text {
     width: auto;
-    font-size: 0.9rem;
   }
   .hero-img img {
     border-radius: 10px;
@@ -553,6 +545,13 @@ footer {
   }
   .hero-text {
     margin-top: 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 413px) {
+  .topnav.responsive a {
+    right: 0px;
   }
 }
 
