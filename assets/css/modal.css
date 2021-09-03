@@ -64,7 +64,6 @@ img {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
-  text-decoration: underline;
 }
 .topnav a.active {
   background-color: #ff0000;
@@ -74,6 +73,20 @@ img {
 
 .topnav .icon {
   display: none;
+}
+
+.navbar-link {
+  position: relative;
+}
+/* underline nav */
+.topnav span::after {
+  content: '';
+  position: absolute;
+  background-color: white;
+  height: 1px;
+  right: 13px;
+  bottom: 9px;
+  left: 13px;
 }
 
 @media screen and (max-width: 768px) {
@@ -487,9 +500,7 @@ input[data-error]::after {
   display: none;
 }
 footer {
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin: 0 20px;
+  margin: 0 10px;
 }
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -508,12 +519,13 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 3rem;
+    font-size: 4rem;
     white-space: normal;
+    font-weight: bold;
   }
   .hero-text {
     width: auto;
-    font-size: 20px;
+    font-size: 0.9rem;
   }
   .hero-img img {
     border-radius: 10px;
@@ -527,6 +539,7 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+    font-size: 0.7rem;
   }
 }
 
