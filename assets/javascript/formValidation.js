@@ -69,10 +69,32 @@ function verifNombre() {
   }
 }
 
+// On vérifie que :
+// Au moins un btn radio est checked avant de continuer
+function verifcheckboxChecked() {
+  // séléctionner toutes les btn radio
+  const allRadios = document.querySelectorAll('#allRadios .checkbox-input')
+  console.log(allRadios)
+
+  // On utilise la boucle for qui nous permettra de répète un bloc d'instructions jusqu'à ce qu'un test ne soit plus vérifié
+  for (let i = 0; i < allRadios.length; i++) {
+    // console.log(allRadios[i])
+    if (allRadios[i].checked) {
+      // console.log('checked')
+      formData[5].setAttribute('data-errorVisible', 'false')
+      break // On utilise break qui permet d'interrompre l'exécution
+    } else {
+      // console.log('not checked')
+      formData[5].setAttribute('data-errorVisible', 'true')
+    }
+  }
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   firstValid()
   lastValid()
   emailValid()
   verifNombre()
+  verifcheckboxChecked()
 })
