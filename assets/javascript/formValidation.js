@@ -71,10 +71,9 @@ function verifNombre() {
 
 // On vérifie que :
 // Au moins un btn radio est checked avant de continuer
-function verifcheckboxChecked() {
+function verifcheckboxRadioChecked() {
   // séléctionner toutes les btn radio
   const allRadios = document.querySelectorAll('#allRadios .checkbox-input')
-  console.log(allRadios)
 
   // On utilise la boucle for qui nous permettra de répète un bloc d'instructions jusqu'à ce qu'un test ne soit plus vérifié
   for (let i = 0; i < allRadios.length; i++) {
@@ -96,5 +95,5 @@ form.addEventListener('submit', (e) => {
   lastValid()
   emailValid()
   verifNombre()
-  verifcheckboxChecked()
+  verifcheckboxRadioChecked()
 })
