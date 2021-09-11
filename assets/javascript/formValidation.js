@@ -12,10 +12,8 @@ function firstValid() {
 
   if (firstNameInput.value.length < 2 || firstNameInput.value === '') {
     formData[0].setAttribute('data-errorVisible', 'true')
-    return true
   } else {
     formData[0].setAttribute('data-errorVisible', 'false')
-    return false
   }
 }
 // On vérifie que :
@@ -26,10 +24,8 @@ function lastValid() {
 
   if (lastNameInput.value.length < 2 || lastNameInput.value === '') {
     formData[1].setAttribute('data-errorVisible', 'true')
-    return true
   } else {
     formData[1].setAttribute('data-errorVisible', 'false')
-    return false
   }
 }
 
@@ -43,10 +39,8 @@ function emailValid() {
 
   if (!emailInput.value === '' || emailInput.value.trim().match(regExMail)) {
     formData[2].setAttribute('data-errorVisible', 'false')
-    return false
   } else {
     formData[2].setAttribute('data-errorVisible', 'true')
-    return true
   }
 }
 
@@ -62,10 +56,8 @@ function verifNombre() {
     numberInput.value < 0
   ) {
     formData[4].setAttribute('data-errorVisible', 'true')
-    return true
   } else {
     formData[4].setAttribute('data-errorVisible', 'false')
-    return false
   }
 }
 
@@ -89,6 +81,22 @@ function verifcheckboxRadioChecked() {
   }
 }
 
+// On vérifie que :
+// La checkbox des conditions d'utilisation sont bien accepter
+function verifConditionsOfUse() {
+  const terms = document.querySelector('#checkbox1')
+  // On regarde l'état du btn
+  const termsChecked = terms.checked
+  // console.log(termsChecked)
+
+  // Si la checkbox n'est pas coché o affiche l'erreur
+  if (!termsChecked) {
+    formData[6].setAttribute('data-errorVisible', 'true')
+  } else {
+    formData[6].setAttribute('data-errorVisible', 'false')
+  }
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault()
   firstValid()
@@ -96,4 +104,5 @@ form.addEventListener('submit', (e) => {
   emailValid()
   verifNombre()
   verifcheckboxRadioChecked()
+  verifConditionsOfUse()
 })
