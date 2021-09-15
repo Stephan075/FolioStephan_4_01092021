@@ -8,20 +8,24 @@ function editNav() {
   }
 }
 
-// Séléctionner nos Elements
-const modalbg = document.querySelector('.bground')
+// Séléctionner nos éléments
+const bground = document.querySelector('.bground')
 const modalBtn = document.querySelectorAll('.modal-btn')
 const modalClose = document.querySelector('.close')
+const thankBtn = document.querySelectorAll('.thank-btn')
+const thankBg = document.querySelector('.bground-thank')
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal))
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = 'block'
+  bground.style.display = 'block'
 }
 
-// close modal
+// close modal "x"
 modalClose.addEventListener('click', () => {
-  modalbg.style.display = 'none'
+  bground.style.display = 'none'
+  // On réinitialise les valeurs de tous les éléments du formulaire
+  form.reset()
 })

@@ -1,53 +1,65 @@
-// Séléctionner nos Elements
+// Séléctionner nos éléments
 const formData = document.querySelectorAll('.formData')
+// console.log(formData)
+
 const errors = formData[0].dataset.errorvisible
-// écouter le submit du form et bloqué la soumission du formulaire par défaut
+// écouter le submit du form et bloquer la soumission du formulaire par défaut
 const form = document.querySelector('form')
 
 // On vérifie que :
-// L'utilisateur rentre bien un prénom qui 2 caractères minimum ou plus
+// L'utilisateur rentre bien un prénom qui comporte 2 caractères minimum ou plus
 //que le champ ne soit pas vide
 function firstValid() {
-  const firstNameInput = document.querySelector('#first')
+  const firstNameInput = document.querySelector('#first').value
+  const isFirstNameValid = firstNameInput.trim().length >= 2
 
-  if (firstNameInput.value.length < 2 || firstNameInput.value === '') {
-    formData[0].setAttribute('data-errorVisible', 'true')
-  } else {
+  if (isFirstNameValid) {
     formData[0].setAttribute('data-errorVisible', 'false')
+  } else {
+    formData[0].setAttribute('data-errorVisible', 'true')
   }
+
+  return isFirstNameValid
 }
 // On vérifie que :
-// L'utilisateur rentre bien un nom qui 2 caractères minimum ou plus
+// L'utilisateur rentre bien un nom qui comporte 2 caractères minimum ou plus
 //que le champ ne soit pas vide
 function lastValid() {
-  const lastNameInput = document.querySelector('#last')
+  const lastNameInput = document.querySelector('#last').value
+  const isLastNameValid = lastNameInput.trim().length >= 2
 
-  if (lastNameInput.value.length < 2 || lastNameInput.value === '') {
-    formData[1].setAttribute('data-errorVisible', 'true')
-  } else {
+  if (isLastNameValid) {
     formData[1].setAttribute('data-errorVisible', 'false')
+  } else {
+    formData[1].setAttribute('data-errorVisible', 'true')
   }
+
+  return isLastNameValid
 }
 
 // On vérifie que :
-// L'utilisateur rentre un mail valide grace vérificateur au regEx
-// que le champ ne soit pas vide
+// L'utilisateur rentre un mail valide grâce au vérificateur regEx
+// Que le champ ne soit pas vide
 function emailValid() {
   const emailInput = document.querySelector('#email')
   const regExMail =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const isEmailValid =
+    !emailInput.value === '' || emailInput.value.trim().match(regExMail)
 
-  if (!emailInput.value === '' || emailInput.value.trim().match(regExMail)) {
+  if (isEmailValid) {
     formData[2].setAttribute('data-errorVisible', 'false')
+    return true
   } else {
     formData[2].setAttribute('data-errorVisible', 'true')
+    return false
   }
 }
 
 // On vérifie que :
-//  l'utilisateur entre bien un nombre,
-// que le champ ne soit pas vide
-// Que lutilisateur ne rentre pas des nombre n'égative
+//  l'utilisateur saisit bien un nombre,
+// Que le champ ne soit pas vide
+// Que l'utilisateur ne rentre pas des nombres négatifs
 function verifNombre() {
   const numberInput = document.querySelector('#quantity')
   if (
@@ -56,8 +68,10 @@ function verifNombre() {
     numberInput.value < 0
   ) {
     formData[4].setAttribute('data-errorVisible', 'true')
+    return false
   } else {
     formData[4].setAttribute('data-errorVisible', 'false')
+    return true
   }
 }
 
@@ -66,43 +80,102 @@ function verifNombre() {
 function verifcheckboxRadioChecked() {
   // séléctionner toutes les btn radio
   const allRadios = document.querySelectorAll('#allRadios .checkbox-input')
+  let cityValid = false
 
-  // On utilise la boucle for qui nous permettra de répète un bloc d'instructions jusqu'à ce qu'un test ne soit plus vérifié
+  // On utilise la boucle for qui nous permettra de répéter un bloc d'instructions jusqu'à ce qu'un test ne soit plus vérifié
   for (let i = 0; i < allRadios.length; i++) {
+    // Si un btn radios est checked ou aps
+    const radioChecked = allRadios[i].checked
+
     // console.log(allRadios[i])
-    if (allRadios[i].checked) {
+    if (radioChecked) {
       // console.log('checked')
       formData[5].setAttribute('data-errorVisible', 'false')
+      cityValid = true
       break // On utilise break qui permet d'interrompre l'exécution
     } else {
       // console.log('not checked')
       formData[5].setAttribute('data-errorVisible', 'true')
     }
   }
+  // console.log(cityValid)
+  return cityValid
 }
 
 // On vérifie que :
-// La checkbox des conditions d'utilisation sont bien accepter
+// La checkbox des conditions d'utilisation est bien acceptée
 function verifConditionsOfUse() {
   const terms = document.querySelector('#checkbox1')
   // On regarde l'état du btn
   const termsChecked = terms.checked
   // console.log(termsChecked)
 
-  // Si la checkbox n'est pas coché o affiche l'erreur
-  if (!termsChecked) {
-    formData[6].setAttribute('data-errorVisible', 'true')
-  } else {
+  // Si la checkbox n'est pas cochée on affiche l'erreur
+  if (termsChecked) {
     formData[6].setAttribute('data-errorVisible', 'false')
+  } else {
+    formData[6].setAttribute('data-errorVisible', 'true')
   }
+  // console.log(termsChecked)
+  return termsChecked
 }
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
+// Toutes les vérifications à faire
+const allValidation = () => {
   firstValid()
   lastValid()
   emailValid()
   verifNombre()
   verifcheckboxRadioChecked()
   verifConditionsOfUse()
+}
+
+// function qui nous permettra de vérifier si tout les champs sont bien validés avant de continuer
+const formValid = () => {
+  if (
+    firstValid() &&
+    lastValid() &&
+    emailValid() &&
+    verifNombre() &&
+    verifcheckboxRadioChecked() &&
+    verifConditionsOfUse()
+  ) {
+    return true
+  }
+  return false
+}
+
+// On crée la partie du modal remerciements une fois le formulaire validé
+const createThanksModal = () => {
+  const div = document.createElement('div')
+  div.className = 'content-thank'
+  div.innerHTML = `
+              <div class="thank-body">
+                <p class="text-thank">Merci !<br /> Votre réservation a été reçue.</p>
+              </div>
+              <input class="button btn-submit button-close" type="submit" value="Fermer" />
+              `
+
+  return div
+}
+
+// évènement qui s'active une fois qu'on clique sur le btn "C'est parti"
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+
+  // si tout les champs son valides on affiche la page de remerciements
+  if (formValid()) {
+    form.style.display = 'none'
+    thankBg.append(createThanksModal())
+
+    // Une fois la page de remerciements affichée on peut rechercher le btn fermer et travailler dessus
+    const btnClose = document.querySelector('.button-close')
+    // Fermer le modal avec le btn fermer
+    btnClose.addEventListener('click', function () {
+      bground.style.display = 'none'
+    })
+  } else {
+    // On relance la fonction de vérification
+    allValidation()
+  }
 })
