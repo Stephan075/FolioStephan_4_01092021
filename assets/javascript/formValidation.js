@@ -56,6 +56,48 @@ function emailValid() {
   }
 }
 
+//
+
+// On calcule la difference entre la date de maintenant et la date entré par l'utilisateur
+
+function getAge(date) {
+  // getTime()  ===> nous return un timestamps
+  const diff = Date.now() - date.getTime()
+  const age = new Date(diff)
+  return Math.abs(age.getUTCFullYear() - 1970)
+}
+
+// On vérifie si l'age est suppérieur a 13ans ou qui retourne pas le message  'Invalid Date'  cela nous permettra dafficher un message d'erreur
+function verifAge(date) {
+  // Age minimun
+  const minAge = 13
+
+  if (
+    getAge(date) < minAge ||
+    date === 'Invalid Date' ||
+    date.toString() === 'Invalid Date' // retourne une chaîne de caractères
+  ) {
+    formData[3].setAttribute('data-errorVisible', 'true')
+    return false
+  } else {
+    formData[3].setAttribute('data-errorVisible', 'false')
+    return true
+  }
+}
+
+// On vérifie que :
+// L'utilisateur rentre une date valide
+function birthdayValid() {
+  let birthday = document.querySelector('#birthdate').value
+
+  // On transforme la date saisis par l'utilisateur en objet Date
+  birthday = new Date(birthday)
+  // function qui vérifie la date
+  if (verifAge(birthday)) {
+    return true
+  }
+}
+
 // On vérifie que :
 //  l'utilisateur saisit bien un nombre,
 // Que le champ ne soit pas vide
@@ -121,21 +163,24 @@ function verifConditionsOfUse() {
 }
 
 // Toutes les vérifications à faire
-const allValidation = () => {
+function allValidation() {
   firstValid()
   lastValid()
   emailValid()
+  birthdayValid()
   verifNombre()
   verifcheckboxRadioChecked()
   verifConditionsOfUse()
 }
 
 // function qui nous permettra de vérifier si tout les champs sont bien validés avant de continuer
-const formValid = () => {
+
+function formValid() {
   if (
     firstValid() &&
     lastValid() &&
     emailValid() &&
+    birthdayValid() &&
     verifNombre() &&
     verifcheckboxRadioChecked() &&
     verifConditionsOfUse()
@@ -146,7 +191,7 @@ const formValid = () => {
 }
 
 // On crée la partie du modal remerciements une fois le formulaire validé
-const createThanksModal = () => {
+function createThanksModal() {
   const div = document.createElement('div')
   div.className = 'content-thank'
   div.innerHTML = `
@@ -162,6 +207,8 @@ const createThanksModal = () => {
 // évènement qui s'active une fois qu'on clique sur le btn "C'est parti"
 form.addEventListener('submit', (event) => {
   event.preventDefault()
+
+  // return birthdayValid()
 
   // si tout les champs son valides on affiche la page de remerciements
   if (formValid()) {
