@@ -58,7 +58,7 @@ function emailValid() {
 
 //
 
-// On calcule la difference entre la date de maintenant et la date entré par l'utilisateur
+// On calcule la différence entre la date du jour et la date saisie par l'utilisateur
 
 function getAge(date) {
   // getTime()  ===> nous return un timestamps
@@ -67,7 +67,7 @@ function getAge(date) {
   return Math.abs(age.getUTCFullYear() - 1970)
 }
 
-// On vérifie si l'age est suppérieur a 13ans ou qui retourne pas le message  'Invalid Date'  cela nous permettra dafficher un message d'erreur
+// On vérifie si l'âge est supérieur à 13 ans ou si le message  'Invalid Date' est retourné, cela nous permettra d'afficher un message d'erreur
 function verifAge(date) {
   // Age minimun
   const minAge = 13
@@ -86,11 +86,11 @@ function verifAge(date) {
 }
 
 // On vérifie que :
-// L'utilisateur rentre une date valide
+// L'utilisateur saisi une date valide
 function birthdayValid() {
   let birthday = document.querySelector('#birthdate').value
 
-  // On transforme la date saisis par l'utilisateur en objet Date
+  // On transforme la date saisie par l'utilisateur en objet Date
   birthday = new Date(birthday)
   // function qui vérifie la date
   if (verifAge(birthday)) {
