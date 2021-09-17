@@ -57,12 +57,14 @@
         <div class="modal-body">
           <!-- form -->
           <form name="reserve" action="index.html" method="POST">
+
             <!-- first name -->
             <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom."
               data-errorVisible="false">
               <label>Prénom</label><br>
               <input class="text-control firstInput" type="text" id="first" name="first" minlength="2" /><br>
             </div>
+
             <!-- last name -->
             <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du nom."
               data-errorVisible="false">
@@ -75,17 +77,20 @@
               <label>E-mail</label><br>
               <input class="text-control" type="text" id="email" name="email" /><br>
             </div>
+
             <!-- date -->
             <div class="formData" data-error=" Vous devez entrer votre date de naissance (13ans minimum)"
               data-errorVisible="false">
               <label>Date de naissance</label><br>
               <input class="text-control" type="date" id="birthdate" name="birthdate" /><br>
             </div>
+
             <!-- tournois -->
             <div class="formData" data-error="Veuillez entrer un nombre." data-errorVisible="false">
               <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
               <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
             </div>
+
             <!-- ville -->
             <p class="text-label">Quelles villes ?</p>
             <div class="formData" id="allRadios" data-error="Veuillez sélectionner une ville."
@@ -135,10 +140,8 @@
             <input class="button btn-submit" type="submit" value="C'est parti" />
           </form>
 
-          <div class="bground-thank">
-
-          </div>
-
+          <!-- Message de remerciement -->
+          <div class="bground-thank"></div>
 
         </div>
       </div>
@@ -149,8 +152,9 @@
       Copyright 2014 - 2020, GameOn Inc.
     </p>
   </footer>
-  <script src="./assets/javascript/modal.js"></script>
-  <script src="./assets/javascript/formValidation.js"></script>
+  <!-- ficher js -->
+  <script type="text/javascript" src="./assets/javascript/modal.js"></script> <!-- modal -->
+  <script type="text/javascript" src="./assets/javascript/formValidation.js"></script><!-- validation -->
 </body>
 
 </html>
